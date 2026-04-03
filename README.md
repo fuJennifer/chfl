@@ -8,7 +8,7 @@ Official implementation of our IJCNN 2026 paper:
 
 ## 🚀 Overview
 
-This repository implements several advanced cyclic or sequential Federated Learning (FL) paradigms:
+This repository implements several cyclic or sequential Federated Learning (FL) paradigms:
 
 - Sequential Federated Learning (SFL) ([Paper](https://proceedings.neurips.cc/paper_files/paper/2023/file/b18e5d6a10ba57d5273871f38189f062-Paper-Conference.pdf))
 - Cyclic Federated Learning (CFL) ([Paper](https://proceedings.mlr.press/v202/cho23b/cho23b.pdf))
