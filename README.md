@@ -17,15 +17,6 @@ These methods are designed to address **data heterogeneity**, **communication ef
 
 ---
 
-## 🧠 Key Features
-
-- 🔁 Sequential client update (SFL)
-- 🔄 Cyclic communication strategy (CFL)
-- 🌐 Hierarchical aggregation across edge servers (CHFL)
-- 📉 Improved convergence under heterogeneous data
-- ⚙️ Flexible and configurable training pipeline
-
----
 
 ## 📊 Supported Datasets
 
