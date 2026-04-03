@@ -12,7 +12,6 @@ This repository implements several advanced cyclic or sequential Federated Learn
 
 - Sequential Federated Learning (SFL) ([Paper](https://proceedings.neurips.cc/paper_files/paper/2023/file/b18e5d6a10ba57d5273871f38189f062-Paper-Conference.pdf))
 - Cyclic Federated Learning (CFL) ([Paper](https://proceedings.mlr.press/v202/cho23b/cho23b.pdf))
-- Cyclic Hierarchical Federated Learning (CHFL) ([Paper](https://openreview.net/pdf?id=PhLCPYsHCw))
 
 These methods are designed to address **data heterogeneity**, **communication efficiency**, and **multi-level distributed systems**.
 
@@ -39,56 +38,31 @@ These methods are designed to address **data heterogeneity**, **communication ef
 ## Key Parameters
 | Parameter       | Description |
 |----------------|------------|
-| `--model`      | Model type (e.g., cnn, rnn) |
-| `--dataset`    | Dataset name (mnist, cifar10, shakespeare) |
+| `--model`      | Model type (e.g., cnn, lstm) |
+| `--dataset`    | Dataset name (mnist, cifar, shakespeare) |
+| `--pattern`    | pattern type (e.g., e2e(cyclic pattern), e2s) |
+| `--hety`       | heterogeneity (e.g., c(IID data), e(Non-IID data)) |
+| `--pc`         | intra edge heterogeneity (e.g., 1,2,5,10) |
+| `--pg`         | inter edge heterogeneity (e.g., 1,2,5,10) |
+| `--epochs`     | Total number of global training rounds |
+| `--edge_ep`    | Number of training rounds in one edge |
 | `--num_users`  | Total number of clients |
 | `--num_edges`  | Number of edge servers (for hierarchical FL) |
-| `--epochs`     | Total number of global training rounds |
-| `--edge_ep`    | Number of local training steps at edge |
-| `--step`       | Cyclic update step size |
-| `--pattern`    | Training mode (sfl, cfl, chfl / e2e) |
-| `--gpu`        | GPU device (e.g., cuda:0) |
-| `--pc`         | Number of participating clients per round |
-| `--pg`         | Participation ratio / grouping factor |
+| `--step`       | Number of training steps in one client |
 | `--select_edge`| Number of selected edges per round |
 
 ## ⚙️ Environment Setup
 
+Please read requirment.txt and recommend use conda environment.
+## Try MNIST
 ```bash
-conda create -n fl python=3.9
-conda activate fl
-pip install torch torchvision numpy matplotlib tqdm
+python src/federated_main.py --model=cnn --dataset=mnist --pattern=e2e --hety=c --pc=1 --pg=10 --gpu=cuda:0 --epochs=1 --edge_ep=1 --num_users=50 --num_edges=10 --step=5 --select_edge=2
 ```
-## Try CHFL
+## Try CIFAR
 ```bash
-python src/federated_main.py \
-    --model=cnn \
-    --dataset=mnist \
-    --pattern=e2e \
-    --hety=e \
-    --pg=1 \
-    --pc=10 \
-    --gpu=cuda:0 \
-    --epochs=100 \
-    --edge_ep=2 \
-    --num_users=50 \
-    --num_edges=10 \
-    --step=5 \
-    --select_edge=10
+python src/federated_main.py --model=cnn --dataset=cifar --pattern=e2e --hety=e --pg=1 --pc=10 --gpu=cuda:0 --epochs=1 --edge_ep=2 --num_users=50 --num_edges=10 --step=5 --select_edge=10
 ```
-## Try CFL
+## Try Shakespeare
 ```bash
-python src/federated_main.py \
-    --model=cnn \
-    --dataset=mnist \
-    --pattern=cfl \
-    --epochs=100
-```
-## Try SFL
-```bash
-python src/federated_main.py \
-    --model=cnn \
-    --dataset=mnist \
-    --pattern=sfl \
-    --epochs=100
+python src/federated_main.py --model=lstm --dataset=shakespeare --pattern=e2s --hety=e --pg=1 --pc=10 --gpu=cuda:0 --epochs=2 --edge_ep=1 --num_users=139 --num_edges=12 --step=12 --select_edge=5
 ```
